@@ -1,0 +1,22 @@
+div#commonArea.commonArea
+	div.gnb
+		ul.qutNmUl
+			li.qutNm
+				a(href=domain) HOME
+			-for(var qut in aniTitle)
+				li.qutNm
+					a(href='#none;')= qut
+					div.titleList
+						-for(var idx in aniTitle[qut])
+							-var title = encodeURI(aniTitle[qut][idx]);
+							div.title
+								a(href='/aniTitleInfo?path='+qut+'/'+title)=  aniTitle[qut][idx]
+								-if(idx%2 == 1)
+									br
+			li.qutNm
+				a(href='aniTitleInfo?path=concert') CONCERT
+			li.qutNm
+				a(href='aniTitleInfo?path=movie') MOVIE
+			li.qutNm
+				a(href='aniTitleInfo?path=temp') TEMP
+

@@ -1,0 +1,22 @@
+doctype html
+html
+	include includes/header.pug
+	body
+		include includes/commonArea.pug
+				
+		div#content
+			table#aniEpList
+				tr
+					th episode
+					th subtitles
+				-var exec = /mp4$/;
+				-for(var idx in aniList)
+					-var aniPath = encodeURI(path);
+					-var aniName = encodeURI(aniList[idx]);
+					tr
+						td
+							a(href='/aniPlayer?aniPath='+aniPath+'&aniName='+aniName)= aniList[idx]
+						td.subtitleYn= subList[idx]?'Y':'N'
+
+		include includes/footer.pug
+
