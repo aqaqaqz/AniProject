@@ -1,5 +1,5 @@
 const port = 43123;
-const certKey = 13579;
+const certKey = ...;
 const aniDefPath = '/media/lsh/MGTEC/download/';
 
 var express = require('express');
@@ -56,7 +56,7 @@ var getCommonData = function(){
 	var data = {
 		maxWidth : 1320,
 		aniTitle : getAniTitle(),
-		domain : 'http://lsh0872.iptime.org:43123/'
+		domain : '....'
 	}
 
 	return data;

@@ -9,14 +9,17 @@ html
 				tr
 					th episode
 					th subtitles
-				-var exec = /mp4$/;
 				-for(var idx in aniList)
 					-var aniPath = encodeURI(path);
 					-var aniName = encodeURI(aniList[idx]);
+					-var url;
 					tr
 						td
-							a(href='/aniPlayer?aniPath='+aniPath+'&aniName='+aniName)= aniList[idx]
-						td.subtitleYn= subList[idx]?'Y':'N'
+							-if(fileType[idx]=='F')
+								a(href='/aniPlayer?aniPath='+aniPath+'&aniName='+aniName)= aniList[idx]
+							-else
+								a(href='/aniTitleInfo?path='+aniPath+'/'+aniName)= aniList[idx]
+						td.subtitleYn= fileType[idx]=='F'?(subList[idx]?'Y':'N'):'DIR'
 
 		include includes/footer.pug
 

@@ -84,16 +84,20 @@ app.get('/aniTitleInfo', (req, res)=>{
 	var exec = /.mp4$/;
 	var aniList = [];
 	var subList = [];
-	tempAniList = fs.readdirSync(aniDefPath+path, 'utf-8');
+	var fileType = [];
+	var filePath = [];
+	tempAniList = fs.readdirSync(aniDefPath+path, {encoding:'utf-8', withFileTypes : true});
 	for(var i=0;i<tempAniList.length;i++){
-		if(exec.test(tempAniList[i])){
-			aniList.push(tempAniList[i]);
+		if(exec.test(tempAniList[i].name) || tempAniList[i].isDirectory()){
+			aniList.push(tempAniList[i].name);
 			var smiPath = aniDefPath+path+'/';
-			subList.push(fs.existsSync(smiPath+tempAniList[i].replace('.mp4', '.smi')) || fs.existsSync(smiPath+tempAniList[i].replace('.mp4', '.srt')));
+			subList.push(fs.existsSync(smiPath+tempAniList[i].name.replace('.mp4', '.smi')) || fs.existsSync(smiPath+tempAniList[i].name.replace('.mp4', '.srt')));
+			fileType.push(tempAniList[i].isDirectory()?'D':'F');
 		}
 	}
 	data['aniList'] = aniList;
 	data['subList'] = subList;
+	data['fileType'] = fileType;
 	res.render('aniTitleInfo', data);
 });
 //ani player
@@ -109,6 +113,16 @@ app.get('/aniPlayer', (req, res)=>{
  	data['srtExist'] = fs.existsSync(aniDefPath+data['aniPath']+'/'+data['aniName'].replace('.mp4', '.srt'));
 	res.render('aniPlayer', data);
 });
+
+
+
+
+
+
+
+
+
+
 //convert smi to vtt
 app.get('/smi', (req, res)=> {
 	if(fs.existsSync(req.query.smiPath)){
