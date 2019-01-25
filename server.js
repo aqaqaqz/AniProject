@@ -115,15 +115,6 @@ app.get('/aniPlayer', (req, res)=>{
 	res.render('aniPlayer', data);
 });
 
-
-
-
-
-
-
-
-
-
 //convert smi to vtt
 app.get('/smi', (req, res)=> {
 	if(fs.existsSync(req.query.smiPath)){
