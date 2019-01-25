@@ -6,20 +6,24 @@ html
 				
 		div#content
 			table#aniEpList
-				tr
+				tr.epHeader
 					th episode
 					th subtitles
 				-for(var idx in aniList)
 					-var aniPath = encodeURI(path);
 					-var aniName = encodeURI(aniList[idx]);
 					-var url;
-					tr
-						td
-							-if(fileType[idx]=='F')
-								a(href='/aniPlayer?aniPath='+aniPath+'&aniName='+aniName)= aniList[idx]
-							-else
+					-if(fileType[idx]=='D'){
+						tr.dir
+							td
 								a(href='/aniTitleInfo?path='+aniPath+'/'+aniName)= aniList[idx]
-						td.subtitleYn= fileType[idx]=='F'?(subList[idx]?'Y':'N'):'DIR'
+							td.subtitleYn DIR
+					-}else{
+						tr
+							td
+								a(href='/aniPlayer?aniPath='+aniPath+'&aniName='+aniName)= aniList[idx]
+							td.subtitleYn= subList[idx]?'Y':'N'
+					-}
 
 		include includes/footer.pug
 

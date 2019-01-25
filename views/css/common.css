@@ -93,6 +93,18 @@ div#content #aniEpList{
 	border : 3px solid #222;
 }
 
+div#content #aniEpList tr{
+	background : whitesmoke;
+}
+
+div#content #aniEpList tr.dir{
+	background : chartreuse;
+}
+
+div#content #aniEpList tr.epHeader{
+	background : coral;
+}
+
 div#content #aniEpList th, td{
         border : 1px solid #222;
 	padding-left : 15px;
