@@ -57,7 +57,7 @@ var getCommonData = function(){
 	var data = {
 		maxWidth : 1320,
 		aniTitle : getAniTitle(),
-		domain : 'http://lsh0872.iptime.org:43123/'
+		domain : domain
 	}
 
 	return data;
