@@ -168,6 +168,10 @@ app.get('/certKeyCheck', (req, res)=>{
 	}
 });
 
+app.get('/dotji', (req, res)=>{
+	res.render('dotji');
+});
+
 
 //test
 app.get('/test', (req, res)=>{
