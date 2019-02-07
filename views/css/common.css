@@ -72,11 +72,27 @@ div#content {
 	clear:both;
 }
 
+div#content #location ul li{
+	float : left;
+	list-style : none;
+	padding-left : 15px;
+        margin-left : 15px;
+        background : url("location.gif") 0 50% no-repeat;
+}
+
+div#content #location ul li:first-child{
+	margin-left : 0px;
+	padding-left : 0px;
+	background : none;
+}
+
+
 div#content #aniPlayer {
+	clear : both;
 	position : relative;
 	width : 1280px;
 	height : 720px;
-	margin-top: 15px;
+	margin-top: 50px;
 	border: 7px ridge #736666;
 }
 
@@ -89,28 +105,55 @@ div#content .uploadForm{
 }
 
 div#content #aniEpList{
-	margin-top : 15px;
-	border : 3px solid #222;
+	clear : both;
+	margin : 15px auto;
+	border-collapse: collapse;
+	width : auto;
+	float : left;
 }
 
-div#content #aniEpList tr{
+div#content #aniEpList tr:hover:not(.epHeader) {
 	background : whitesmoke;
 }
 
 div#content #aniEpList tr.dir{
-	background : chartreuse;
+	//background : chartreuse;
 }
 
+
+
 div#content #aniEpList tr.epHeader{
-	background : coral;
+	font-size : 1.5em;
+	text-align : left;
 }
 
 div#content #aniEpList th, td{
-        border : 1px solid #222;
-	padding-left : 15px;
-	padding-right: 15px;
+        border-bottom : 1px solid #ececec;
+}
+
+div#content #aniEpList th{
+        padding : 10px 15px 10px 15px;
+}
+
+div#content #aniEpList td{
+        padding : 5px 15px 5px 15px;
+}
+
+div#content #aniEpList td a{
+        text-decoration: none;
+        color : #888;
+}
+
+div#content #aniEpList td a:hover{
+        text-decoration: underline;
+        color : #000;
 }
 
 div#content #aniEpList .subtitleYn{
 	text-align : center;
+}
+
+.footer{
+	clear : both;
+	height : 50px;
 }

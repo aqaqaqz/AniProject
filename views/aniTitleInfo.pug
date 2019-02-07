@@ -5,6 +5,8 @@ html
 		include includes/commonArea.pug
 				
 		div#content
+			include includes/location.pug
+
 			table#aniEpList
 				tr.epHeader
 					th TITLE
@@ -21,7 +23,7 @@ html
 					-}else{
 						tr
 							td
-								a(href='/aniPlayer?aniPath='+aniPath+'&aniName='+aniName)= aniList[idx]
+								a(href='/aniPlayer?path='+aniPath+'&aniName='+aniName)= aniList[idx]
 							td.subtitleYn= subList[idx]?'Y':'N'
 					-}
 

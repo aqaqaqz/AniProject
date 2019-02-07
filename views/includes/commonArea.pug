@@ -5,7 +5,7 @@ div#commonArea.commonArea
 				a(href=domain) HOME
 			-for(var qut in aniTitle)
 				li.qutNm
-					a(href='#none;')= qut
+					a(href='/aniTitleInfo?path='+qut)= qut
 					div.titleList
 						-for(var idx in aniTitle[qut])
 							-var title = encodeURI(aniTitle[qut][idx]);

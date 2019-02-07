@@ -108,10 +108,10 @@ app.get('/aniPlayer', (req, res)=>{
                 return;
         }
 	var data = getCommonData();
-	data['aniPath'] = req.query.aniPath;
+	data['path'] = req.query.path;
 	data['aniName'] = req.query.aniName;
-	data['smiExist'] = fs.existsSync(aniDefPath+data['aniPath']+'/'+data['aniName'].replace('.mp4', '.smi'));
- 	data['srtExist'] = fs.existsSync(aniDefPath+data['aniPath']+'/'+data['aniName'].replace('.mp4', '.srt'));
+	data['smiExist'] = fs.existsSync(aniDefPath+data['path']+'/'+data['aniName'].replace('.mp4', '.smi'));
+ 	data['srtExist'] = fs.existsSync(aniDefPath+data['path']+'/'+data['aniName'].replace('.mp4', '.srt'));
 	res.render('aniPlayer', data);
 });
 
