@@ -143,8 +143,8 @@ app.post('/smiUpload', upload.single('smiFile'), (req, res)=>{
 	var data = getCommonData();
         data['path'] = req.query.aniPath;
         data['aniName'] = req.query.aniName;
-	data['smiExist'] = fs.existsSync(aniDefPath+data['aniPath']+'/'+data['aniName'].replace('.mp4', '.smi'));
-        data['srtExist'] = fs.existsSync(aniDefPath+data['aniPath']+'/'+data['aniName'].replace('.mp4', '.srt'));
+	data['smiExist'] = fs.existsSync(aniDefPath+data['path']+'/'+data['aniName'].replace('.mp4', '.smi'));
+        data['srtExist'] = fs.existsSync(aniDefPath+data['path']+'/'+data['aniName'].replace('.mp4', '.srt'));
 
         res.render('aniPlayer', data);
 
