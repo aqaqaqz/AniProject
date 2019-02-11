@@ -37,6 +37,7 @@ $(document).ready(function(){
                         if($(val).prop("checked"))
                                 moveList.push($(val).parent().parent().find("td").eq(0).text().replace(/.*aniName=/gi, ""));
                 });
+		if(moveList.length == 0) return;
 
 		$.ajax({
 			url : '/moveFile',
