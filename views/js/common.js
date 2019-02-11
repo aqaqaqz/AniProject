@@ -25,5 +25,36 @@ $(document).ready(function(){
 		initGnb();
 	};
 	init();
+
+	fnMove = function(oriPath){
+		fnMove = function(){ console.log("작업중입니다."); return; };
+
+		var selList = $("input.moveInput");
+                var moveList = [];
+		var movePath = 'temp';
+
+                $.each(selList, function(idx, val){
+                        if($(val).prop("checked"))
+                                moveList.push($(val).parent().parent().find("td").eq(0).text().replace(/.*aniName=/gi, ""));
+                });
+
+		$.ajax({
+			url : '/moveFile',
+			type : 'GET',
+			dataType : 'json',
+			data : {
+				oriPath : oriPath,
+				movePath : movePath,
+				moveList : moveList
+			},
+			success : function(d){
+				if(d.result)
+					location.reload(true);
+			},
+			error : function(e){
+				console.log(e);
+			}
+		});
+	}
 });
 

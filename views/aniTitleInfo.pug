@@ -9,21 +9,25 @@ html
 				tr.epHeader
 					th TITLE
 					th subtitle
+					-if(moveYn == 'Y')
+						th 
+							button#moveBtn(onclick='javascript:fnMove("'+encodeURI(path)+'");') move
 				-for(var idx in aniList)
 					-var aniPath = encodeURI(path);
 					-var aniName = encodeURI(aniList[idx]);
 					-var url;
-					-if(fileType[idx]=='D'){
-						tr.dir
+					tr
+						-if(fileType[idx]=='D'){
 							td
 								a(href='/aniTitleInfo?path='+aniPath+'/'+aniName)= aniList[idx]
 							td.subtitleYn DIR
-					-}else{
-						tr
+						-}else{
 							td
 								a(href='/aniPlayer?path='+aniPath+'&aniName='+aniName)= aniList[idx]
 							td.subtitleYn= subList[idx]?'Y':'N'
-					-}
+						-}
+						-if(moveYn == 'Y')
+							td.move
+								input.moveInput(type='checkbox')
 
 		include includes/footer.pug
-

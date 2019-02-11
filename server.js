@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var pug = require('pug');
 var smi2vtt = require('smi2vtt');
 var srt2vtt = require('srt2vtt2');
@@ -12,6 +13,7 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(express.static('views'));
 app.use(express.static('img'));
 app.use(express.static('file'));
@@ -78,9 +80,13 @@ app.get('/aniTitleInfo', (req, res)=>{
                 res.render('certPage');
                 return;
         }
+
 	var path = req.query.path;
 	var data = getCommonData();
 	data['path'] = path;
+	if(path == "torDown") data['moveYn'] = 'Y';
+	else data['moveYn'] = 'N';
+	//move file option
 
 	var exec = /.mp4$/;
 	var aniList = [];
@@ -148,6 +154,20 @@ app.post('/smiUpload', upload.single('smiFile'), (req, res)=>{
 
         res.render('aniPlayer', data);
 
+});
+
+//move
+app.get('/moveFile', (req, res)=>{
+	var moveList = req.query.moveList;
+	var oriPath = aniDefPath + req.query.oriPath;
+	var movePath = aniDefPath + req.query.movePath;
+
+	for(var i=0;i<moveList.length;i++){
+		var title = moveList[i];
+		fs.renameSync(oriPath+'/'+title, movePath+'/'+title);
+	};
+
+	res.send({result : true});
 });
 
 //certificate

@@ -22,9 +22,11 @@ html
 						-else
 							track(src='/srt?srtPath='+srtPath kind='subtitles' srclang='ko' label='vrt(korea)' default)
 
-			div.uploadForm
-				form(action='/smiUpload?aniPath='+encodeURI(path)+'&aniName='+encodeURI(aniName) method='post' enctype='multipart/form-data')
-					input(type='file' name='smiFile' id='smiFile')
-					input(type='submit' id='smiSubmit' value='upload')
+			-if(path.indexOf('torDown')==-1){
+				div.uploadForm
+					form(action='/smiUpload?aniPath='+encodeURI(path)+'&aniName='+encodeURI(aniName) method='post' enctype='multipart/form-data')
+						input(type='file' name='smiFile' id='smiFile')
+						input(type='submit' id='smiSubmit' value='upload')
+			-}
 
 		include includes/footer.pug

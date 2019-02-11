@@ -153,6 +153,10 @@ div#content #aniEpList .subtitleYn{
 	text-align : center;
 }
 
+div#content #aniEpList .move{
+        text-align : center;
+}
+
 .footer{
 	clear : both;
 	height : 50px;
