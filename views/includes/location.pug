@@ -3,4 +3,6 @@ div#location
 	ul
 		-for(var i=0;i<locationList.length;i++)
 			li=locationList[i]
-
+		-var name = aniName.replace(locationList[locationList.length-1]+ " - ", "")
+		-name = name.replace(/\[.*\]/gi, "").replace(/\(.*\)/gi, "").replace(".mp4", "");
+		li=name
