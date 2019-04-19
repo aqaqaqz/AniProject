@@ -8,7 +8,7 @@ div#commonArea.commonArea
 					a(href='/aniTitleInfo?path='+qut)= qut
 					div.titleList
 						-for(var idx in aniTitle[qut])
-							-var title = encodeURI(aniTitle[qut][idx]);
+							-var title = encodeURIComponent(aniTitle[qut][idx]);
 							div.title
 								a(href='/aniTitleInfo?path='+qut+'/'+title)=  aniTitle[qut][idx]
 								-if(idx%2 == 1)

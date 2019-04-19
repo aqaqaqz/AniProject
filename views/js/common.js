@@ -26,12 +26,25 @@ $(document).ready(function(){
 	};
 	init();
 
-	fnMove = function(oriPath){
+	//type : 'd' -> 폴더정리
+	//type : 't' -> temp 폴더로
+	fnSelectMove = function(oriPath){
+		var type = prompt("intput type...", "");
+		if(type!='t' && type!='d'){
+			alert("can not use this type...");
+			return;
+		}
+		fnMove(oriPath, type);
+	};
+
+	var fnMove = function(oriPath, type){
+		var temp = fnMove;
 		fnMove = function(){ console.log("작업중입니다."); return; };
 
 		var selList = $("input.moveInput");
                 var moveList = [];
-		var movePath = 'temp';
+		var movePath = 'temp/';
+		if(type == 'd') movePath = '';
 
                 $.each(selList, function(idx, val){
                         if($(val).prop("checked"))
@@ -46,7 +59,8 @@ $(document).ready(function(){
 			data : {
 				oriPath : oriPath,
 				movePath : movePath,
-				moveList : moveList
+				moveList : moveList,
+				type : type
 			},
 			success : function(d){
 				if(d.result)

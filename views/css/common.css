@@ -144,6 +144,10 @@ div#content #aniEpList td a{
         color : #888;
 }
 
+div#content #aniEpList td a:visited{
+	color : #bbb;
+}
+
 div#content #aniEpList td a:hover{
         text-decoration: underline;
         color : #000;

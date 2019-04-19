@@ -6,6 +6,9 @@ var srt2vtt = require('srt2vtt2');
 var fs = require('fs');
 var multer = require('multer');
 var cookieParser = require('cookie-parser');
+
+var {PythonShell} = require('python-shell');
+
 var app = express();
 
 app.locals.pretty = true;
@@ -84,7 +87,7 @@ app.get('/aniTitleInfo', (req, res)=>{
 	var path = req.query.path;
 	var data = getCommonData();
 	data['path'] = path;
-	if(path == "torDown") data['moveYn'] = 'Y';
+	if(path == "torDown" || path == "temp") data['moveYn'] = 'Y';
 	else data['moveYn'] = 'N';
 	//move file option
 
@@ -161,11 +164,29 @@ app.get('/moveFile', (req, res)=>{
 	var moveList = req.query.moveList;
 	var oriPath = aniDefPath + req.query.oriPath;
 	var movePath = aniDefPath + req.query.movePath;
+	var type = req.query.type;
 
 	for(var i=0;i<moveList.length;i++){
 		var title = moveList[i];
-		fs.renameSync(oriPath+'/'+title, movePath+'/'+title);
+		fs.renameSync(oriPath+title, movePath+title);
+		if(type == "d"){
+			var smi = title.replace('.mp4', '.smi');
+			var srt = title.replace('.mp4', '.srt');
+			var vtt = title.replace('.mp4', '.vtt');
+			if(fs.existsSync(oriPath+smi))
+				fs.renameSync(oriPath+smi, movePath+smi);
+			if(fs.existsSync(oriPath+srt))
+				fs.renameSync(oriPath+srt, movePath+srt);
+			if(fs.existsSync(oriPath+vtt))
+				fs.renameSync(oriPath+vtt, movePath+vtt);
+		}
 	};
+
+	if(type == 'd'){
+		PythonShell.run(aniDefPath+'folder.py', null, (err)=>{
+			if(err){ throw err; }
+		});
+	}
 
 	res.send({result : true});
 });

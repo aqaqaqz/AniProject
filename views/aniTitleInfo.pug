@@ -11,10 +11,10 @@ html
 					th subtitle
 					-if(moveYn == 'Y')
 						th 
-							button#moveBtn(onclick='javascript:fnMove("'+encodeURI(path)+'");') move
+							button#moveBtn(onclick='javascript:fnSelectMove("'+encodeURI(path)+'/'+'");') move
 				-for(var idx in aniList)
-					-var aniPath = encodeURI(path);
-					-var aniName = encodeURI(aniList[idx]);
+					-var aniPath = encodeURIComponent(path);
+					-var aniName = encodeURIComponent(aniList[idx]);
 					-var url;
 					tr
 						-if(fileType[idx]=='D'){
