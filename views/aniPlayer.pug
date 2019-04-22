@@ -9,9 +9,9 @@ html
 
 			div#aniPlayer
 				video(controls autoplay name='media' controlsList='nodownload' width='100%' height='100%')
-					-var aniPath = domain + encodeURI(path) + '/' + encodeURI(aniName);
-					-var smiPath = '/media/lsh/MGTEC/download/'+encodeURI(path)+'/'+aniName.replace('.mp4', '.smi');
-					-var srtPath = '/media/lsh/MGTEC/download/'+encodeURI(path)+'/'+aniName.replace('.mp4', '.srt');
+					-var aniPath = domain + encodeURIComponent(path) + '/' + encodeURIComponent(aniName);
+					-var smiPath = '/media/lsh/MGTEC/download/'+encodeURIComponent(path)+'/'+encodeURIComponent(aniName.replace('.mp4', '.smi'));
+					-var srtPath = '/media/lsh/MGTEC/download/'+encodeURIComponent(path)+'/'+encodeURIComponent(aniName.replace('.mp4', '.srt'));
 
 					source(src=aniPath type='video/mp4')
 					-if(smiExist)
@@ -24,7 +24,7 @@ html
 
 			-if(path.indexOf('torDown')==-1){
 				div.uploadForm
-					form(action='/smiUpload?aniPath='+encodeURI(path)+'&aniName='+encodeURI(aniName) method='post' enctype='multipart/form-data')
+					form(action='/smiUpload?aniPath='+encodeURIComponent(path)+'&aniName='+encodeURIComponent(aniName) method='post' enctype='multipart/form-data')
 						input(type='file' name='smiFile' id='smiFile')
 						input(type='submit' id='smiSubmit' value='upload')
 			-}
