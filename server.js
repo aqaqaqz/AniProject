@@ -97,6 +97,15 @@ app.get('/aniTitleInfo', (req, res)=>{
 	var fileType = [];
 	var filePath = [];
 	tempAniList = fs.readdirSync(aniDefPath+path, {encoding:'utf-8', withFileTypes : true});
+	tempAniList.sort((a, b)=>{
+		var dirA = a.isDirectory();
+		var dirB = b.isDirectory();
+		if(!(dirA&&dirB) && (dirA||dirB)){
+			if(dirA) return -1;
+			return 1;
+		}
+		return a.name>b.name?1:-1;
+	});
 	for(var i=0;i<tempAniList.length;i++){
 		if(exec.test(tempAniList[i].name) || tempAniList[i].isDirectory()){
 			aniList.push(tempAniList[i].name);
