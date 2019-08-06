@@ -71,5 +71,27 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+	fnSubUpload = function(){
+		var formData = new FormData($("form")[0]);
+
+		$.ajax({
+			url : '/subUpload?path='+formData.get('path'),
+			processData: false,
+			contentType: false,
+			type:'POST',
+			data:formData,
+			success:function(d){
+				location.reload();
+			},
+			error:function(e){
+				alert(e);
+			}
+		});
+	};
+
+	$("#searchBtn").click(function(){
+		window.location.href = '/search?keyword='+$("#keyword").val();
+	});
 });
 
