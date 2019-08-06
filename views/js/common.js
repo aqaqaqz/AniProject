@@ -91,7 +91,7 @@ $(document).ready(function(){
 	};
 
 	$("#searchBtn").click(function(){
-		window.location.href = '/search?keyword='+$("#keyword").val();
+		window.location.href = '/search?keyword='+encodeURIComponent($("#keyword").val());
 	});
 });
 

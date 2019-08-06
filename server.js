@@ -100,8 +100,8 @@ app.get('/search', (req, res)=>{
 	var aniList = [];
 
 	var reg = /[\d]{4}-[\d]/;
-    var dirList = fs.readdirSync(common.getDefPath(), 'utf8');
-    for( var idx in dirList){
+	var dirList = fs.readdirSync(common.getDefPath(), 'utf8');
+	for( var idx in dirList){
 		var dirName = dirList[idx];
 		if(reg.test(dirName) || dirName=="etc"){
 			var tempList = getSearchAniList(req.query.keyword, common.getDefPath()+dirName);
@@ -110,7 +110,7 @@ app.get('/search', (req, res)=>{
 			}
 		}
 	}
-	
+
 	aniList.sort((a, b)=>{
 		var dirA = a.isDirectory();
 		var dirB = b.isDirectory();
@@ -184,7 +184,7 @@ app.post('/subUpload', upload.single('subFile'), (req, res)=>{
 app.get('/changeToVtt', (req, res)=>{
 	var path = req.query.path;
 	var type = req.query.type;
-	
+
 	if(type=='smi' && fs.existsSync(path)){
 		smi2vtt(path).then( data=> {
 			res.set('Content-Type', 'text/vtt');
