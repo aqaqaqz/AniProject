@@ -10,7 +10,8 @@ div#commonArea.commonArea
 						-for(var idx in aniTitle[qut])
 							-var title = encodeURIComponent(aniTitle[qut][idx]);
 							div.title
-								a(href='/aniTitleInfo?path='+qut+'/'+title)=  aniTitle[qut][idx]
+								-var temp = aniTitle[qut][idx];
+								a(href='/aniTitleInfo?path='+qut+'/'+title)= (temp.length>40?temp.substring(0, 40)+"...":temp)
 								-if(idx%2 == 1)
 									br
 			li.qutNm
