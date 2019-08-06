@@ -9,24 +9,19 @@ html
 
 			div#aniPlayer
 				video(controls autoplay name='media' controlsList='nodownload' width='100%' height='100%')
-					-var aniPath = domain + encodeURIComponent(path) + '/' + encodeURIComponent(aniName);
-					-var smiPath = '/media/lsh/MGTEC/download/'+encodeURIComponent(path)+'/'+encodeURIComponent(aniName.replace('.mp4', '.smi'));
-					-var srtPath = '/media/lsh/MGTEC/download/'+encodeURIComponent(path)+'/'+encodeURIComponent(aniName.replace('.mp4', '.srt'));
+					-var aniPath = domain + encodeURIComponent(path);
 
 					source(src=aniPath type='video/mp4')
-					-if(smiExist)
-						track(src='/smi?smiPath='+smiPath kind='subtitles' srclang='ko' label='smi(korea)' default)
-					-if(srtExist)
-						-if(smiExist)
-							track(src='/srt?srtPath='+srtPath kind='subtitles' srclang='ko' label='vrt(korea)')
-						-else
-							track(src='/srt?srtPath='+srtPath kind='subtitles' srclang='ko' label='vrt(korea)' default)
+					-for(var i=0;i<ani.subList.length;i++){
+						track(src='changeToVtt?path='+ani.subList[i].path+'&type='+ani.subList[i].type kind='subtitles' srclang='ko' label=ani.subList[i].type 'default')
+					-}
 
 			-if(path.indexOf('torDown')==-1){
 				div.uploadForm
-					form(action='/smiUpload?aniPath='+encodeURIComponent(path)+'&aniName='+encodeURIComponent(aniName) method='post' enctype='multipart/form-data')
-						input(type='file' name='smiFile' id='smiFile')
-						input(type='submit' id='smiSubmit' value='upload')
+					form
+						input(type='file' name='subFile' id='subFile')
+						input(type='hidden' name='path' id='path' value=path)
+						input(type='button' id='uploadBtn' onclick='fnSubUpload();' value='upload')
 			-}
 
 		include includes/footer.pug

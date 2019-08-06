@@ -33,11 +33,25 @@ div#commonArea a {
 	color: #fff;
 }
 
-div#commonArea .qutNmUl {
+div#commonArea ul {
 	margin : 0 auto;
 	color : #fff;
 	width : 1320px;
 	position: relative;
+}
+
+div#commonArea .searchLi{
+	overflow : hidden;
+	float : right;
+	padding : 10px;
+}
+
+div#commonArea #searchBtn{
+	overflow : hidden;
+	float : right;
+	border: none;
+	height: 25px;
+	margin-left: 10px;
 }
 
 div#commonArea .titleList{
@@ -76,8 +90,8 @@ div#content #location ul li{
 	float : left;
 	list-style : none;
 	padding-left : 15px;
-        margin-left : 15px;
-        background : url("location.gif") 0 50% no-repeat;
+	margin-left : 15px;
+	background : url("location.gif") 0 50% no-repeat;
 }
 
 div#content #location ul li:first-child{
@@ -115,12 +129,6 @@ div#content #aniEpList{
 div#content #aniEpList tr:hover:not(.epHeader) {
 	background : whitesmoke;
 }
-
-div#content #aniEpList tr.dir{
-	//background : chartreuse;
-}
-
-
 
 div#content #aniEpList tr.epHeader{
 	font-size : 1.5em;

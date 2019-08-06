@@ -5,19 +5,24 @@ div#commonArea.commonArea
 				a(href=domain) HOME
 			-for(var qut in aniTitle)
 				li.qutNm
-					a(href='/aniTitleInfo?path='+qut)= qut
+					a(href='/moveToPath?path='+qut)= qut
 					div.titleList
 						-for(var idx in aniTitle[qut])
 							-var title = encodeURIComponent(aniTitle[qut][idx]);
 							div.title
 								-var temp = aniTitle[qut][idx];
-								a(href='/aniTitleInfo?path='+qut+'/'+title)= (temp.length>40?temp.substring(0, 40)+"...":temp)
+								a(href='/moveToPath?path='+qut+'/'+title)= (temp.length>40?temp.substring(0, 40)+"...":temp)
 								-if(idx%2 == 1)
 									br
 			li.qutNm
-				a(href='aniTitleInfo?path=etc') ETC
+				a(href='moveToPath?path=etc') ETC
 			li.qutNm
-				a(href='aniTitleInfo?path=temp') TEMP
+				a(href='moveToPath?path=temp') TEMP
 			li.qutNm
-				a(href='aniTitleInfo?path=torDown') DOWN
+				a(href='moveToPath?path=torDown') DOWN
+
+		ul.serach
+			li.searchLi
+				input(id="keyword" name="keyword")
+				input(id='searchBtn' type='button' value="search")
 
