@@ -211,9 +211,9 @@ app.get('/moveFile', (req, res)=>{
 		fs.renameSync(oriPath+title, movePath+title);
 		if(type == "d"){
 			for(var j=0;j<subList.length;j++){
-				var sub = title.replace('.mp4', subList[j]);
+				var sub = title.replace('.mp4', '.'+subList[j]);
 				if(fs.existsSync(oriPath+sub))
-					fs.renameSync(oriPath+smi, movePath+smi);
+					fs.renameSync(oriPath+sub, movePath+sub);
 			}
 		}
 	};
