@@ -13,14 +13,14 @@ html
 
 					source(src=aniPath type='video/mp4')
 					-for(var i=0;i<ani.subList.length;i++){
-						track(src='changeToVtt?path='+ani.subList[i].path+'&type='+ani.subList[i].type kind='subtitles' srclang='ko' label=ani.subList[i].type 'default')
+						track(src='changeToVtt?path='+encodeURIComponent(ani.subList[i].path)+'&type='+ani.subList[i].type kind='subtitles' srclang='ko' label=ani.subList[i].type 'default')
 					-}
 
 			-if(path.indexOf('torDown')==-1){
 				div.uploadForm
 					form
 						input(type='file' name='subFile' id='subFile')
-						input(type='hidden' name='path' id='path' value=path)
+						input(type='hidden' name='path' id='path' value=encodeURIComponent(path))
 						input(type='button' id='uploadBtn' onclick='fnSubUpload();' value='upload')
 			-}
 
