@@ -253,8 +253,8 @@ app.get('/dotji', (req, res)=>{
 
 
 var options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/lsh0872.iptime.org/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/lsh0872.iptime.org/cert.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/lshCert/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/lshCert/cert.pem')
 };
 
 https.createServer(options, app).listen(port);
