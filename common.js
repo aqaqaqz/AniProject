@@ -65,6 +65,7 @@ module.exports = {
 			res.render('certPage');
 			 return false;
 		}
+
 		return true;
 	}
 }

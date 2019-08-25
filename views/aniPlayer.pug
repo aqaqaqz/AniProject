@@ -8,7 +8,7 @@ html
 			include includes/location.pug
 
 			div#aniPlayer
-				video(controls autoplay name='media' controlsList='nodownload' width='100%' height='100%')
+				video(id='player' controls autoplay name='media' controlsList='nodownload' width='100%' height='100%')
 					-var aniPath = domain + encodeURIComponent(path);
 
 					source(src=aniPath type='video/mp4')
@@ -24,4 +24,10 @@ html
 						input(type='button' id='uploadBtn' onclick='fnSubUpload();' value='upload')
 			-}
 
+			br
+			input(type='button' id='chromeCastBtn' onclick='fnChromeCastBtn();' value='크롬캐스트')
+			|  자막여부 : 
+			input(type='checkbox' id='chromeCastSubYn')
+
+			
 		include includes/footer.pug

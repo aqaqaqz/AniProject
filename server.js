@@ -3,6 +3,8 @@ var multer = require('multer');
 var pug = require('pug');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var https = require('https');
+var cors = require('cors');
 
 var smi2vtt = require('smi2vtt');
 var srt2vtt = require('srt2vtt2');
@@ -24,6 +26,19 @@ app.use(express.static('views'));
 app.use(express.static('img'));
 app.use(express.static('file'));
 app.use(express.static('/media/lsh/MGTEC/download'));
+
+/*
+var whiteList = ['*'];
+var corsOptions = {
+	origin : function(origin, callback){
+		var isWhitelisted = whiteList.indexOf(origin) != -1;
+		callback(null, isWhitelisted);
+	},
+	credentials : true
+}
+app.use(cors(corsOptions));
+*/
+app.use(cors());
 
 const port = 43123;
 
@@ -232,7 +247,14 @@ app.get('/dotji', (req, res)=>{
 });
 
 
-app.listen(port, ()=>{
-	console.log(`Connected : ${port}!`);
-});
+//app.listen(80, ()=>{
+//	console.log(`Connected : 80`);
+//});
 
+
+var options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/lsh0872.iptime.org/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/lsh0872.iptime.org/cert.pem')
+};
+
+https.createServer(options, app).listen(port);
