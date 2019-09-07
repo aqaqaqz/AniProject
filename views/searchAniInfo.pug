@@ -9,13 +9,13 @@ html
 				table#aniEpList
 					tr.epHeader
 						th TITLE
-						th subtitle					
+						th sub					
 					-for(var idx in aniList)
 						-var utfPath = encodeURIComponent(aniList[idx].path);
 						-var utfName = encodeURIComponent(aniList[idx].name);
 						tr
 							td
 								a(href='/moveToPath?path='+utfPath+'/'+utfName)= aniList[idx].name
-							td.subtitleYn= aniList[idx].fileType=='D' ? 'DIR' : (aniList[idx].subYn?'Y':'N')
+							td.subtitleYn= aniList[idx].fileType=='D' ? 'D' : (aniList[idx].subYn?'Y':'N')
 
 		include includes/footer.pug

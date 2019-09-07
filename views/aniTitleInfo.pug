@@ -9,17 +9,17 @@ html
 				table#aniEpList
 					tr.epHeader
 						th TITLE
-						th subtitle
+						th sub
 						-if(moveYn == 'Y')
 							th 
-								button#moveBtn(onclick='javascript:fnSelectMove("'+encodeURI(path)+'/'+'");') move
+								button#moveBtn(onclick='javascript:fnSelectMove("'+encodeURI(path)+'/'+'");') m
 					-for(var idx in aniList)
 						-var utfPath = encodeURIComponent(path);
 						-var utfName = encodeURIComponent(aniList[idx].name);
 						tr
 							td
 								a(href='/moveToPath?path='+utfPath+'/'+utfName)= aniList[idx].name
-							td.subtitleYn= aniList[idx].fileType=='D' ? 'DIR' : (aniList[idx].subYn?'Y':'N')
+							td.subtitleYn= aniList[idx].fileType=='D' ? 'D' : (aniList[idx].subYn?'Y':'N')
 							
 							-if(moveYn == 'Y')
 								td.move

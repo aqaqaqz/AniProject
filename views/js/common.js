@@ -113,7 +113,7 @@ $(document).ready(function(){
 	}
 
 	fnSubUpload = function(){
-		var formData = new FormData($("form")[0]);
+		var formData = new FormData($(".uploadForm form")[0]);
 
 		$.ajax({
 			url : '/subUpload?path='+formData.get('path'),
