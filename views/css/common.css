@@ -14,76 +14,8 @@ body {
 	border : 0;
 }
 
-div#commonArea {
-	margin : 0px;
-	padding : 0px;
-	border : 0px;
-	width : 100%;
-	height : 45px;
-	background : #404040;
-	position : fixed;
-	top : 0;
-	left : 0;
-	z-index : 10;
-}
-
-div#commonArea a {
-	cursor: pointer;
-	text-decoration: none;
-	color: #fff;
-}
-
-div#commonArea ul {
-	margin : 0 auto;
-	color : #fff;
-	width : 1320px;
-	position: relative;
-}
-
-div#commonArea .searchLi{
-	overflow : hidden;
-	float : right;
-	padding : 10px;
-}
-
-div#commonArea #searchBtn{
-	overflow : hidden;
-	float : right;
-	border: none;
-	height: 25px;
-	margin-left: 10px;
-}
-
-div#commonArea .titleList{
-	display : none;
-	position : absolute;
-	background : #fff;
-	border : 1px solid #222;
-	margin-top : 8px;
-	margin-left : -10px;
-}
-
-div#commonArea .titleList a{
-	color : #222;
-}
-
-div#commonArea .titleList .title{
-	float : left;
-	margin-left : 5px;
-	z-index : 200;
-}
-
-div#commonArea .qutNm {
-	overflow : hidden;
-	float : left;
-	padding : 10px;
-}
-
 div#content {
-	width : 1320px;
 	padding-top : 45px;
-	margin : 0 auto;
-	clear:both;
 }
 
 div#content #location ul li{
@@ -95,35 +27,23 @@ div#content #location ul li{
 }
 
 div#content #location ul li:first-child{
-	margin-left : 0px;
+	margin-left : -20px;
 	padding-left : 0px;
 	background : none;
-}
-
-
-div#content #aniPlayer {
-	clear : both;
-	position : relative;
-	width : 1280px;
-	height : 720px;
-	margin-top: 50px;
-	border: 7px ridge #736666;
-}
-
-div#content video {
-	position : absolute;
 }
 
 div#content .uploadForm{
 	margin-top : 20px;
 }
 
+div#content .uploadForm #subFile{
+	float:left;
+}
+
 div#content #aniEpList{
 	clear : both;
 	margin : 15px auto;
 	border-collapse: collapse;
-	width : auto;
-	float : left;
 }
 
 div#content #aniEpList tr:hover:not(.epHeader) {
@@ -167,6 +87,14 @@ div#content #aniEpList .subtitleYn{
 
 div#content #aniEpList .move{
         text-align : center;
+}
+
+div#content #aniPlayer {
+	margin-top: 40px;
+}
+
+div#content video {
+	padding : 10px;
 }
 
 .footer{

@@ -10,16 +10,26 @@ var srt2vtt = require('srt2vtt2');
 var subList = ['smi', 'srt'];
 
 var getTitle = function(){
-	var reg = /[\d]{4}-[\d]/;
+	var reg = /[\d]{4}/;
 	var qutList = fs.readdirSync(defPath, 'utf8');
 	var aniTitle = {};
+	
 	for( var idx in qutList){
 		var qut = qutList[idx];
+		if(!reg.test(qut)) continue;
+		
+		var year = reg.exec(qut);
+		if(aniTitle[year] == undefined)
+			aniTitle[year] = [qut];
+		else
+			aniTitle[year].push(qut);
+		/*
 		if(reg.test(qut)){
 			aniTitle[qut] = fs.readdirSync(defPath+qut, 'utf-8');
 		}
+		*/
 	}
-
+	
 	return aniTitle;
 };
 

@@ -27,6 +27,11 @@ app.use(express.static('img'));
 app.use(express.static('file'));
 app.use(express.static('/media/lsh/MGTEC/download'));
 
+
+var favicon = require('serve-favicon');
+app.use(favicon('/opt/dev/js/git/AniProject/views/favicon/f.ico'));
+
+
 /*
 var whiteList = ['*'];
 var corsOptions = {

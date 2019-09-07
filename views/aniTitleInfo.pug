@@ -5,23 +5,24 @@ html
 		include includes/commonArea.pug
 				
 		div#content
-			table#aniEpList
-				tr.epHeader
-					th TITLE
-					th subtitle
-					-if(moveYn == 'Y')
-						th 
-							button#moveBtn(onclick='javascript:fnSelectMove("'+encodeURI(path)+'/'+'");') move
-				-for(var idx in aniList)
-					-var utfPath = encodeURIComponent(path);
-					-var utfName = encodeURIComponent(aniList[idx].name);
-					tr
-						td
-							a(href='/moveToPath?path='+utfPath+'/'+utfName)= aniList[idx].name
-						td.subtitleYn= aniList[idx].fileType=='D' ? 'DIR' : (aniList[idx].subYn?'Y':'N')
-						
+			center
+				table#aniEpList
+					tr.epHeader
+						th TITLE
+						th subtitle
 						-if(moveYn == 'Y')
-							td.move
-								input.moveInput(type='checkbox')
+							th 
+								button#moveBtn(onclick='javascript:fnSelectMove("'+encodeURI(path)+'/'+'");') move
+					-for(var idx in aniList)
+						-var utfPath = encodeURIComponent(path);
+						-var utfName = encodeURIComponent(aniList[idx].name);
+						tr
+							td
+								a(href='/moveToPath?path='+utfPath+'/'+utfName)= aniList[idx].name
+							td.subtitleYn= aniList[idx].fileType=='D' ? 'DIR' : (aniList[idx].subYn?'Y':'N')
+							
+							-if(moveYn == 'Y')
+								td.move
+									input.moveInput(type='checkbox')
 
 		include includes/footer.pug

@@ -1,28 +1,33 @@
-div#commonArea.commonArea
-	div.gnb
-		ul.qutNmUl
-			li.qutNm
-				a(href=domain) HOME
-			-for(var qut in aniTitle)
-				li.qutNm
-					a(href='/moveToPath?path='+qut)= qut
-					div.titleList
-						-for(var idx in aniTitle[qut])
-							-var title = encodeURIComponent(aniTitle[qut][idx]);
-							div.title
-								-var temp = aniTitle[qut][idx];
-								a(href='/moveToPath?path='+qut+'/'+title)= (temp.length>40?temp.substring(0, 40)+"...":temp)
-								-if(idx%2 == 1)
-									br
-			li.qutNm
-				a(href='moveToPath?path=etc') ETC
-			li.qutNm
-				a(href='moveToPath?path=temp') TEMP
-			li.qutNm
-				a(href='moveToPath?path=torDown') DOWN
+nav.navbar.navbar-inverse.navbar-fixed-top
+	div.container
+		div.navbar-header
+			button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
+				span.sr-only Toggle navigation
+				class.icon-bar
+				class.icon-bar
+				class.icon-bar
+			a.navbar-brand(href=domain) HOME
 
-		ul.serach
-			li.searchLi
-				input(id="keyword" name="keyword")
-				input(id='searchBtn' type='button' value="search")
+		div.navbar-collapse.collapse(id="navbar")
+			ul.nav.navbar-nav
+				-for(var qut in aniTitle)
+					li.dropdown
+						a.dropdown-toggle(href='#' data-toggle="dropdown" role="button" aria-expanded="false")= qut
+							span.caret
+						ul.dropdown-menu(role='menu')
+							-for(var idx in aniTitle[qut])
+								li
+									-var temp = aniTitle[qut][idx];
+									a(href='/moveToPath?path='+temp)= (temp.length>40?temp.substring(0, 40)+"...":temp)
+				li
+					a(href='moveToPath?path=etc') ETC
+				li
+					a(href='moveToPath?path=temp') TEMP
+				li
+					a(href='moveToPath?path=torDown') DOWN
 
+			form.navbar-form.navbar-right
+				div.form-group
+					input.form-control(id="keyword" name="keyword")
+				div.form-group
+					input.btn(id='searchBtn' type='button' value="search")
