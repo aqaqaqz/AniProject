@@ -3,7 +3,7 @@ html
 	include includes/header.pug
 	body
 		include includes/commonArea.pug
-				
+
 		div#content
 			center
 				table#aniEpList
@@ -20,9 +20,8 @@ html
 							td
 								a(href='/moveToPath?path='+utfPath+'/'+utfName)= aniList[idx].name
 							td.subtitleYn= aniList[idx].fileType=='D' ? 'D' : (aniList[idx].subYn?'Y':'N')
-							
+
 							-if(moveYn == 'Y')
 								td.move
 									input.moveInput(type='checkbox')
-
-		include includes/footer.pug
+			include includes/footer.pug

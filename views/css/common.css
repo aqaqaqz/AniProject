@@ -15,7 +15,11 @@ body {
 }
 
 div#content {
-	padding-top : 45px;
+	padding-top : 30px;
+}
+
+div#content #location #naviArea{
+	max-width : 1280px;
 }
 
 div#content #location ul li{
@@ -32,17 +36,32 @@ div#content #location ul li:first-child{
 	background : none;
 }
 
-div#content .uploadForm{
-	margin-top : 20px;
+
+div#content .uploadForm .uploadArea{
+	max-width : 1280px;
 }
 
-div#content .uploadForm #subFile{
-	float:left;
+div#content .uploadForm input{
+	float : left;
+}
+
+div#content .ccArea{
+	text-align : left;
+	max-width : 1280px;
+}
+
+div#content .ccArea #chromeCastSubYn{
+	margin-left : 10px;
+}
+
+div#content .ccArea input{
+	float : left;
 }
 
 div#content #aniEpList{
 	clear : both;
 	margin : 15px auto;
+	max-width : 1280px;
 	border-collapse: collapse;
 }
 
@@ -53,6 +72,10 @@ div#content #aniEpList tr:hover:not(.epHeader) {
 div#content #aniEpList tr.epHeader{
 	font-size : 1.5em;
 	text-align : left;
+}
+
+div#content #aniEpList tr.epHeader th:first-child{
+	width : 100%;
 }
 
 div#content #aniEpList th, td{
@@ -91,6 +114,7 @@ div#content #aniEpList .move{
 
 div#content #aniPlayer {
 	margin-top: 40px;
+	max-width : 1280px;
 }
 
 div#content video {

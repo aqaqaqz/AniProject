@@ -1,17 +1,17 @@
 div#location
-	-var locationList = path.split("/");
-	ul
-		-var pre;
-		-for(var i=0;i<locationList.length;i++)
-			-if(i+1 != locationList.length){
-				li=locationList[i]
-				-pre = locationList[i];
-			-}else{
-				-var name = locationList[i].replace(pre+" - ", "");
-				-var pattern = /.*\s-\s\d\d/;
-				-name = name.replace(/\[.*\]/gi, "").replace(".mp4", "");
-				-if(pattern.test(name)) name = pattern.exec(name);
-				-else name = name.replace(/\(.*\)/gi, "")
-				li=name
-			-}
-
+	#naviArea
+		-var locationList = path.split("/");
+		ul
+			-var pre;
+			-for(var i=0;i<locationList.length;i++)
+				-if(i+1 != locationList.length){
+					li=locationList[i]
+					-pre = locationList[i];
+				-}else{
+					-var name = locationList[i].replace(pre+" - ", "");
+					-var pattern = /.*\s-\s\d\d/;
+					-name = name.replace(/\[.*\]/gi, "").replace(".mp4", "");
+					-if(pattern.test(name)) name = pattern.exec(name);
+					-else name = name.replace(/\(.*\)/gi, "")
+					li=name
+				-}

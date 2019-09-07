@@ -5,29 +5,33 @@ html
 		include includes/commonArea.pug
 				
 		div#content
-			include includes/location.pug
+			center
+				include includes/location.pug
 
-			div#aniPlayer
-				video(id='player' controls autoplay name='media' controlsList='nodownload' width='100%' height='100%')
-					-var aniPath = domain + encodeURIComponent(path);
+				div#aniPlayer
+					video(id='player' controls autoplay name='media' controlsList='nodownload' width='100%' height='100%')
+						-var aniPath = domain + encodeURIComponent(path);
 
-					source(src=aniPath type='video/mp4')
-					-for(var i=0;i<ani.subList.length;i++){
-						track(src='changeToVtt?path='+encodeURIComponent(ani.subList[i].path)+'&type='+ani.subList[i].type kind='subtitles' srclang='ko' label=ani.subList[i].type 'default')
-					-}
+						source(src=aniPath type='video/mp4')
+						-for(var i=0;i<ani.subList.length;i++){
+							track(src='changeToVtt?path='+encodeURIComponent(ani.subList[i].path)+'&type='+ani.subList[i].type kind='subtitles' srclang='ko' label=ani.subList[i].type 'default')
+						-}
 
-			-if(path.indexOf('torDown')==-1){
-				div.uploadForm
-					form
-						input(type='file' name='subFile' id='subFile')
-						input(type='hidden' name='path' id='path' value=encodeURIComponent(path))
-						input(type='button' id='uploadBtn' onclick='fnSubUpload();' value='upload')
-			-}
+				-if(path.indexOf('torDown')==-1){
+					div.uploadForm
+						div.uploadArea
+							form
+								input(type='file' name='subFile' id='subFile')
+								input(type='hidden' name='path' id='path' value=encodeURIComponent(path))
+								input(type='button' id='uploadBtn' onclick='fnSubUpload();' value='upload')
+					br
+					br
+				-}
 
-			br
-			input(type='button' id='chromeCastBtn' onclick='fnChromeCastBtn();' value='크롬캐스트')
-			|  자막여부 : 
-			input(type='checkbox' id='chromeCastSubYn')
+				div.chromeCast
+					div.ccArea
+						input(type='button' id='chromeCastBtn' onclick='fnChromeCastBtn();' value='크롬캐스트')
+						| 자막여부
+						input(type='checkbox' id='chromeCastSubYn')
 
-			
 		include includes/footer.pug

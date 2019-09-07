@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 
 	var init = function(){
-		$('#mainImg').width(window.innerWidth);
+		$('#mainImg').width(Math.min(window.innerWidth,1280 ));
 		initGnb();
 		initChromeCast();
 		initAniPlayer();
