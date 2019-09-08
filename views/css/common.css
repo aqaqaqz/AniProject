@@ -14,6 +14,10 @@ body {
 	border : 0;
 }
 
+input, video:focus{
+	outline:none;
+}
+
 div#content {
 	padding-top : 30px;
 }
@@ -61,7 +65,7 @@ div#content .ccArea input{
 div#content #aniEpList{
 	clear : both;
 	margin : 15px auto;
-	max-width : 1280px;
+	max-width : 1000px;
 	border-collapse: collapse;
 }
 
