@@ -9,10 +9,14 @@ $(document).ready(function(){
 		};
 
 		initializeCastApi = function() {
-			cast.framework.CastContext.getInstance().setOptions({
-				receiverApplicationId : chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
-				//receiverApplicationId : "CC1AD845"
-			});
+			try{
+				cast.framework.CastContext.getInstance().setOptions({
+					receiverApplicationId : chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
+					//receiverApplicationId : "CC1AD845"
+				});
+			}catch(e){
+				setTimeout(initializeCastApi, 1000);
+			}
 		};
 	}
 
@@ -135,6 +139,11 @@ $(document).ready(function(){
 	});
 
 	fnChromeCastBtn = function(){
+		if(typeof cast === "undefined"){
+			console.log("로딩중입니다.");
+			return;
+		}
+
 		if(cast.framework.CastContext.getInstance().getCurrentSession()){
 			if (confirm("기존의 연결을 종료하시겠습니까?") == true)
 				cast.framework.CastContext.getInstance().getCurrentSession().endSession(true);
