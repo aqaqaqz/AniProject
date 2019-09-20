@@ -47,12 +47,6 @@ app.use(cors());
 
 const port = 43123;
 
-/*
-	검색기능
-	(대상폴더는 공통폴더 + 하드코딩 폴더)
-	(폴더명에 검색어가 포함되어 있으면 그 위치추가시키고 종료)
-*/
-
 //home
 app.get('/', (req, res)=>{
 	if(!common.checkCert(req, res)) return;
@@ -90,8 +84,9 @@ app.get('/moveToPath', (req, res)=>{
 		});
 
 		var exec = /.mp4$/;
+		var exec2 = /.mkv$/;
 		for(var i=0;i<tempAniList.length;i++){
-			if(exec.test(tempAniList[i].name) || tempAniList[i].isDirectory()){
+			if(exec.test(tempAniList[i].name) || exec2.test(tempAniList[i].name) || tempAniList[i].isDirectory()){
 				var ani = {};
 				ani.name = tempAniList[i].name;
 				ani.subYn = common.getExistSubtitle(fullPath+'/'+ani.name).length>0;
@@ -153,11 +148,12 @@ app.get('/search', (req, res)=>{
 var getSearchAniList = (keyword, path)=>{
 	//name, isDirectory(), path
 	var exec = /.mp4$/;
+	var exec2 = /.mkv$/;
 	path += '/';
 	var list = fs.readdirSync(path, {encoding:'utf-8', withFileTypes : true});
 	var result = [];
 	for(var i in list){
-		if(list[i].name.indexOf(keyword) >= 0 && (list[i].isDirectory() || exec.test(list[i].name))){
+		if(list[i].name.indexOf(keyword) >= 0 && (list[i].isDirectory() || exec.test(list[i].name) || exec2.test(list[i].name))){
 			list[i].path = path.replace(common.getDefPath(), "");
 			result.push(list[i]);
 		}else if(list[i].isDirectory()){

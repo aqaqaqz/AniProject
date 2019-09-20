@@ -46,7 +46,7 @@ module.exports = {
 	getExistSubtitle : function(path, name){
 		var result = [];
 		for(var i=0;i<subList.length;i++){
-			var subPath = path.replace('.mp4', '.'+subList[i]);
+			var subPath = path.replace(path.substr(path.length-4), '.'+subList[i]);
 			if(fs.existsSync(subPath)) result.push({type:subList[i], path:subPath});
 		}
 		return result;
