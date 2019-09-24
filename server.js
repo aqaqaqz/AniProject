@@ -189,7 +189,9 @@ var upload = multer({
 		},
 		filename : function(req, file, cb){
 			var location = req.query.path.split('/');
-			cb(null, location[location.length-1].replace('.mp4', common.checkSubtitleType(file)));
+			var temp = location[location.length-1];
+			temp = temp.substr(temp.length-4);
+			cb(null, location[location.length-1].replace(temp, common.checkSubtitleType(file)));
 		}
 	})
 });

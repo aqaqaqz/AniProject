@@ -10,7 +10,7 @@ div#location
 				-}else{
 					-var name = locationList[i].replace(pre+" - ", "");
 					-var pattern = /.*\s-\s\d\d/;
-					-name = name.replace(/\[.*\]/gi, "").replace(".mp4", "");
+					-name = name.replace(/\[.*\]/gi, "").replace(".mp4", "").replace(".mkv", "");
 					-if(pattern.test(name)) name = pattern.exec(name);
 					-else name = name.replace(/\(.*\)/gi, "")
 					li=name
