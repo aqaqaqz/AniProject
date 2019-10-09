@@ -8,6 +8,7 @@ var cors = require('cors');
 
 var smi2vtt = require('smi2vtt');
 var srt2vtt = require('srt2vtt2');
+var ass2vtt = require('ass-to-vtt');
 
 var fs = require('fs');
 var common = require('./common.js');
@@ -212,6 +213,10 @@ app.get('/changeToVtt', (req, res)=>{
 		srt2vtt(path, function(err, data){
 			if(!err) res.send(fs.readFileSync(data.vtt));
 		})
+	}else if(type=='ass' && fs.existsSync(path)){
+		fs.createReadStream(path)
+			.pipe(ass2vtt())
+			.pipe(res);
 	}else
 		res.send({});
 });

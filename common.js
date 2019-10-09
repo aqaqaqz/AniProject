@@ -7,7 +7,7 @@ const defPath = '/media/lsh/MGTEC/download/';
 var smi2vtt = require('smi2vtt');
 var srt2vtt = require('srt2vtt2');
 
-var subList = ['smi', 'srt'];
+var subList = ['smi', 'srt', 'ass'];
 
 var getTitle = function(){
 	var reg = /[\d]{4}/;
