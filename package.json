@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "animation streaming server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ass-to-vtt": "^1.2.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "pug": "^2.0.3",
+    "python-shell": "^1.0.7",
+    "serve-favicon": "^2.5.0",
+    "smi2vtt": "^0.1.1",
+    "srt2vtt2": "0.0.2",
+    "underscore": "^1.9.1"
+  }
+}
