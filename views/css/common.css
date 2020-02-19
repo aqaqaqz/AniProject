@@ -125,6 +125,14 @@ div#content video {
 	padding : 10px;
 }
 
+div#content div.shortCutLink{
+	clear : both;
+}
+
+div#content div.shortCutLink a{
+	padding : 20px;
+}
+
 .footer{
 	clear : both;
 	height : 50px;

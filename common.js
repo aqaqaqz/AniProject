@@ -33,6 +33,44 @@ var getTitle = function(){
 	return aniTitle;
 };
 
+var getExistSubtitle = function(path){
+    var result = [];
+    for(var i=0;i<subList.length;i++){
+        var subPath = path.replace(path.substr(path.length-4), '.'+subList[i]);
+        if(fs.existsSync(subPath)) result.push({type:subList[i], path:subPath});
+    }
+    return result;
+};
+
+var getFileList = function(path){
+    var aniList = [];
+    var tempList = fs.readdirSync(path, {encoding:'utf-8', withFileTypes : true});
+
+    tempList.sort((a, b)=>{
+        var dirA = a.isDirectory();
+        var dirB = b.isDirectory();
+        if(!(dirA&&dirB) && (dirA||dirB)){
+            if(dirA) return -1;
+            return 1;
+        }
+        return a.name>b.name?1:-1;
+    });
+
+    var exec = /.mp4$/;
+    var exec2 = /.mkv$/;
+    for(var i=0;i<tempList.length;i++){
+        if(exec.test(tempList[i].name) || exec2.test(tempList[i].name) || tempList[i].isDirectory()){
+            var ani = {};
+            ani.name = tempList[i].name;
+            ani.subYn = getExistSubtitle(path+'/'+ani.name).length>0;
+            ani.fileType = (tempList[i].isDirectory()?'D':'F');
+            aniList.push(ani);
+        }
+    }
+
+    return aniList;
+};
+
 module.exports = {
 	getCertKey : function(){
 		return certKey;
@@ -43,13 +81,8 @@ module.exports = {
 	getDefPath : function(){
 		return defPath;
 	},
-	getExistSubtitle : function(path, name){
-		var result = [];
-		for(var i=0;i<subList.length;i++){
-			var subPath = path.replace(path.substr(path.length-4), '.'+subList[i]);
-			if(fs.existsSync(subPath)) result.push({type:subList[i], path:subPath});
-		}
-		return result;
+	getExistSubtitle : function(path){
+		return getExistSubtitle(path);
 	},
 	getSubList : function(){
 		return subList;
@@ -70,6 +103,28 @@ module.exports = {
 
 		return data;
 	},
+    getFileList : function(path){
+        return getFileList(path);
+    },
+    getShortCutLink : function(path){
+        var result = {pre : "" , next : ""};
+        var pathArr = path.split("/");
+        var lastPath = pathArr.pop();
+        var prePath = pathArr.reduce( (pre, val, idx, pathArr) =>{
+            return (pre + val + "/");
+        }, "");
+        
+        var list = getFileList(prePath);
+        for(var i=0;i<list.length;i++){
+            if(list[i].name == lastPath){
+                if(i>0 && list[i-1].fileType!="D") result.pre = prePath.replace(defPath,'') + list[i-1].name;
+                if(i+1 != list.length) result.next = prePath.replace(defPath, '') + list[i+1].name;
+                break;
+            }
+        }
+
+        return result;
+    },
 	checkCert : function(req, res){
 		if(req.cookies.certKeyYn != 'TRUE'){
 			res.render('certPage');

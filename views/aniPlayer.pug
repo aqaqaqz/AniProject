@@ -34,4 +34,12 @@ html
 						| 자막여부
 						input(type='checkbox' id='chromeCastSubYn')
 
+				-if(ani.shortCutLink.pre!='' || ani.shortCutLink.next!='')
+					div.shortCutLink
+						-if(ani.shortCutLink.pre != '')
+							a(href='/moveToPath?path='+ani.shortCutLink.pre)= "이전화"
+						-if(ani.shortCutLink.next != '')
+							a(href='/moveToPath?path='+ani.shortCutLink.next)= "다음화"
+						
+
 		include includes/footer.pug

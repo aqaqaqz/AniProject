@@ -67,41 +67,18 @@ app.get('/moveToPath', (req, res)=>{
 
 	var data = common.getData();
 	data.path = path;
-	var aniList = [];
 	if(fs.lstatSync(fullPath).isDirectory()){
 		if(path == "torDown" || path == "temp") data['moveYn'] = 'Y';
 		else data['moveYn'] = 'N';
 
-		tempAniList = fs.readdirSync(fullPath, {encoding:'utf-8', withFileTypes : true});
-
-		tempAniList.sort((a, b)=>{
-			var dirA = a.isDirectory();
-			var dirB = b.isDirectory();
-			if(!(dirA&&dirB) && (dirA||dirB)){
-				if(dirA) return -1;
-				return 1;
-			}
-			return a.name>b.name?1:-1;
-		});
-
-		var exec = /.mp4$/;
-		var exec2 = /.mkv$/;
-		for(var i=0;i<tempAniList.length;i++){
-			if(exec.test(tempAniList[i].name) || exec2.test(tempAniList[i].name) || tempAniList[i].isDirectory()){
-				var ani = {};
-				ani.name = tempAniList[i].name;
-				ani.subYn = common.getExistSubtitle(fullPath+'/'+ani.name).length>0;
-				ani.fileType = (tempAniList[i].isDirectory()?'D':'F');
-				aniList.push(ani);
-			}
-		}
-		data.aniList = aniList;
+		data.aniList = common.getFileList(fullPath);
 
 		res.render('aniTitleInfo', data);
 		return;
 	}else{
 		var ani = {};
 		ani.subList = common.getExistSubtitle(fullPath);
+		ani.shortCutLink = common.getShortCutLink(fullPath);
 		data.ani = ani;
 		res.render('aniPlayer', data);
 		return;
