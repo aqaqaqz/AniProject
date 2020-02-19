@@ -16,6 +16,13 @@ html
 						-for(var i=0;i<ani.subList.length;i++){
 							track(src='changeToVtt?path='+encodeURIComponent(ani.subList[i].path)+'&type='+ani.subList[i].type kind='subtitles' srclang='ko' label=ani.subList[i].type 'default')
 						-}
+				-if(ani.shortCutLink.pre!='' || ani.shortCutLink.next!='')
+					div.shortCutLink
+						-if(ani.shortCutLink.pre != '')
+							a(href='/moveToPath?path='+ani.shortCutLink.pre)= "이전화"
+						-if(ani.shortCutLink.next != '')
+							a(href='/moveToPath?path='+ani.shortCutLink.next)= "다음화"
+
 
 				-if(path.indexOf('torDown')==-1){
 					div.uploadForm
@@ -33,13 +40,5 @@ html
 						input(type='button' id='chromeCastBtn' onclick='fnChromeCastBtn();' value='크롬캐스트')
 						| 자막여부
 						input(type='checkbox' id='chromeCastSubYn')
-
-				-if(ani.shortCutLink.pre!='' || ani.shortCutLink.next!='')
-					div.shortCutLink
-						-if(ani.shortCutLink.pre != '')
-							a(href='/moveToPath?path='+ani.shortCutLink.pre)= "이전화"
-						-if(ani.shortCutLink.next != '')
-							a(href='/moveToPath?path='+ani.shortCutLink.next)= "다음화"
-						
 
 		include includes/footer.pug
