@@ -127,10 +127,10 @@ module.exports = {
     },
 	checkCert : function(req, res){
 		if(req.cookies.certKeyYn != 'TRUE'){
+			res.cookie('preUrl', req.url);
 			res.render('certPage');
 			 return false;
 		}
-
 		return true;
 	}
 }

@@ -150,7 +150,10 @@ app.get('/certKeyCheck', (req, res)=>{
 
 	if(iCertKey == common.getCertKey()){
 		res.cookie('certKeyYn', 'TRUE');
-		res.render('main', common.getData());
+		var url = req.cookies.preUrl;
+		res.clearCookie('preUrl');
+		res.redirect(url);
+		//res.render('main', common.getData());
 	}else{
 		data = { result : 'worng certificate key...' };
 		res.render('certPage', data);
