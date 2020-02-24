@@ -152,8 +152,11 @@ app.get('/certKeyCheck', (req, res)=>{
 		res.cookie('certKeyYn', 'TRUE');
 		var url = req.cookies.preUrl;
 		res.clearCookie('preUrl');
-		res.redirect(url);
-		//res.render('main', common.getData());
+
+		if(url!=undefined)
+			res.redirect(url);
+		else
+			res.render('main', common.getData());
 	}else{
 		data = { result : 'worng certificate key...' };
 		res.render('certPage', data);
