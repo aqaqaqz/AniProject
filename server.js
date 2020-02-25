@@ -47,6 +47,7 @@ app.use(cors(corsOptions));
 app.use(cors());
 
 const port = 43123;
+var dirList = [];
 
 //home
 app.get('/', (req, res)=>{
@@ -84,65 +85,6 @@ app.get('/moveToPath', (req, res)=>{
 		return;
 	}
 });
-
-app.get('/search', (req, res)=>{
-	if(!common.checkCert(req, res)) return;
-
-	var data = common.getData();
-
-	var aniList = [];
-
-	var reg = /[\d]{4}-[\d]/;
-	var dirList = fs.readdirSync(common.getDefPath(), 'utf8');
-	for( var idx in dirList){
-		var dirName = dirList[idx];
-		if(reg.test(dirName) || dirName=="etc"){
-			var tempList = getSearchAniList(req.query.keyword, common.getDefPath()+dirName);
-			for(var idx in tempList){
-				aniList.push(tempList[idx]);
-			}
-		}
-	}
-
-	aniList.sort((a, b)=>{
-		var dirA = a.isDirectory();
-		var dirB = b.isDirectory();
-		if(!(dirA&&dirB) && (dirA||dirB)){
-			if(dirA) return -1;
-			return 1;
-		}
-		return a.name>b.name?1:-1;
-	});
-
-	for(var i=0;i<aniList.length;i++){
-		aniList[i].subYn = common.getExistSubtitle(aniList[i].path+'/'+aniList[i].name).length>0;
-		aniList[i].fileType = (aniList[i].isDirectory()?'D':'F');
-	}
-	data.aniList = aniList;
-
-	res.render('searchAniInfo', data);
-	return;
-});
-var getSearchAniList = (keyword, path)=>{
-	//name, isDirectory(), path
-	var exec = /.mp4$/;
-	var exec2 = /.mkv$/;
-	path += '/';
-	var list = fs.readdirSync(path, {encoding:'utf-8', withFileTypes : true});
-	var result = [];
-	for(var i in list){
-		if(list[i].name.indexOf(keyword) >= 0 && (list[i].isDirectory() || exec.test(list[i].name) || exec2.test(list[i].name))){
-			list[i].path = path.replace(common.getDefPath(), "");
-			result.push(list[i]);
-		}else if(list[i].isDirectory()){
-			var temp = getSearchAniList(keyword, path+list[i].name);
-			for(var j in temp)
-				result.push(temp[j]);
-		}
-	}
-	return result;
-}
-
 
 app.get('/certKeyCheck', (req, res)=>{
 	var data;
@@ -232,6 +174,86 @@ app.get('/moveFile', (req, res)=>{
 
 	res.send({result : true});
 });
+
+var dirList = [];
+app.get('/listUpdate', (req, res)=>{
+	dirList = [];
+
+	var reg = /[\d]{4}-[\d]/;
+	var dir = fs.readdirSync(common.getDefPath(), 'utf8');
+	for(var idx in dir){
+		var name = dir[idx];
+		if(reg.test(name) || name=="etc"){
+			dirList.push(searchLow(common.getDefPath(), "", name));
+		}
+	}
+
+	res.send(dirList);
+});
+var searchLow = function(defPath, prePath, name){
+	var t = {};
+	t.name = name;
+	t.low = [];
+	t.fullPath = prePath + name;
+	t.isDir = fs.lstatSync(defPath + t.fullPath).isDirectory();
+	if(!t.isDir) return t;
+	t.fullPath += "/";
+
+	var list = fs.readdirSync(defPath+t.fullPath, {encoding:'utf-8', withFileTypes : true});
+	for(var i in list)
+		t.low.push(searchLow(defPath, t.fullPath, list[i].name));
+
+	return t;
+};
+
+app.get('/search', (req, res)=>{
+	if(!common.checkCert(req, res)) return;
+
+	var data = common.getData();
+
+	var aniList = searchAniList(req.query.keyword, dirList);
+	aniList.sort((a, b)=>{
+		var dirA = a.isDir;
+		var dirB = b.isDir;
+		if(!(dirA&&dirB) && (dirA||dirB)){
+			if(dirA) return -1;
+			return 1;
+		}
+		return a.name>b.name?1:-1;
+	});
+
+	for(var i=0;i<aniList.length;i++){
+		aniList[i].subYn = common.getExistSubtitle(common.getDefPath() + aniList[i].path).length>0;
+		aniList[i].fileType = (aniList[i].isDir?'D':'F');
+	};
+	data.aniList = aniList;
+
+	res.render('searchAniInfo', data);
+	return;
+});
+var searchAniList = (keyword, dir)=>{
+	var exec1 = /.mp4$/;
+	var exec2 = /.mkv$/;
+
+	var result = [];
+	if(dir.length == 0) return result;
+
+	for(var i in dir){
+		if(dir[i].name.indexOf(keyword)>-1 && (dir[i].isDir || exec1.test(dir[i].name) || exec2.test(dir[i].name))){
+			var temp = {};
+			temp.path = dir[i].fullPath;
+			temp.name = dir[i].name;
+			temp.isDir = dir[i].isDir;
+			result.push(temp);
+		}else if(dir[i].isDir){
+			var temp = searchAniList(keyword, dir[i].low);
+			for(var j in temp)
+				result.push(temp[j]);
+		}
+	}
+
+	return result;
+};
 
 app.get('/dotji', (req, res)=>{
 	res.render('dotji');

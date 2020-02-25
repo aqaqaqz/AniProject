@@ -12,9 +12,8 @@ html
 						th sub					
 					-for(var idx in aniList)
 						-var utfPath = encodeURIComponent(aniList[idx].path);
-						-var utfName = encodeURIComponent(aniList[idx].name);
 						tr
 							td
-								a(href='/moveToPath?path='+utfPath+'/'+utfName)= aniList[idx].name
+								a(href='/moveToPath?path='+utfPath)= aniList[idx].name
 							td.subtitleYn= aniList[idx].fileType=='D' ? 'D' : (aniList[idx].subYn?'Y':'N')
 		include includes/footer.pug
