@@ -193,14 +193,14 @@ var searchLow = function(defPath, prePath, name){
 	var t = {};
 	t.name = name;
 	t.low = [];
-	t.fullPath = prePath + name;
-	t.isDir = fs.lstatSync(defPath + t.fullPath).isDirectory();
+	t.path = prePath + name;
+	t.isDir = fs.lstatSync(defPath + t.path).isDirectory();
 	if(!t.isDir) return t;
-	t.fullPath += "/";
+	t.path += "/";
 
-	var list = fs.readdirSync(defPath+t.fullPath, {encoding:'utf-8', withFileTypes : true});
+	var list = fs.readdirSync(defPath+t.path, {encoding:'utf-8', withFileTypes : true});
 	for(var i in list)
-		t.low.push(searchLow(defPath, t.fullPath, list[i].name));
+		t.low.push(searchLow(defPath, t.path, list[i].name));
 
 	return t;
 };
@@ -240,7 +240,7 @@ var searchAniList = (keyword, dir)=>{
 	for(var i in dir){
 		if(dir[i].name.indexOf(keyword)>-1 && (dir[i].isDir || exec1.test(dir[i].name) || exec2.test(dir[i].name))){
 			var temp = {};
-			temp.path = dir[i].fullPath;
+			temp.path = dir[i].path;
 			temp.name = dir[i].name;
 			temp.isDir = dir[i].isDir;
 			result.push(temp);
