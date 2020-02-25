@@ -47,7 +47,6 @@ app.use(cors(corsOptions));
 app.use(cors());
 
 const port = 43123;
-var dirList = [];
 
 //home
 app.get('/', (req, res)=>{
