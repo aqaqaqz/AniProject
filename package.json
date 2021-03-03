@@ -18,7 +18,7 @@
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "python-shell": "^1.0.7",
     "serve-favicon": "^2.5.0",
     "smi2vtt": "^0.1.1",
