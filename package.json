@@ -23,6 +23,6 @@
     "serve-favicon": "^2.5.0",
     "smi2vtt": "^0.1.1",
     "srt2vtt2": "0.0.2",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
